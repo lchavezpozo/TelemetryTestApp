@@ -13,11 +13,13 @@ exporters:
       insecure: true
   prometheus:
     endpoint: "0.0.0.0:9090"
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
 service:
   pipelines:
     traces:
       receivers: [otlp]
       exporters: [otlp]
-    metrics:
+    logs:
       receivers: [otlp]
-      exporters: [prometheus]
+      exporters: [loki]
